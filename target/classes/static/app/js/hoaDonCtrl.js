@@ -69,6 +69,7 @@ app.controller("hoaDonCtrl", function ($scope, $http) {
         }
         $scope.page = $scope.items.slice(begin, end);
     };
+//Phần code của Tâm
 
     $scope.init = () => {
         $http.get(`http://localhost:8080/api/orders/hoaDon`).then(resp => {
@@ -82,7 +83,7 @@ app.controller("hoaDonCtrl", function ($scope, $http) {
     }
 
     $scope.init();
-
+//
     //Hiển thị table
     $scope.selectedRow = null;
     $scope.showDetails = function (row) {

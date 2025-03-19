@@ -2,6 +2,7 @@ app.controller('ChartController', function ($scope, $http) {
     $scope.labels = [];
     $scope.data = [];
     $scope.orderChuaXL = 0;
+//Phần code của Tâm
 
     // Lấy số đơn chưa xử lý
     $http.get(`${host}/orders/orderChuaXL`)
@@ -66,3 +67,4 @@ app.controller('ChartController', function ($scope, $http) {
         });
     };
 });
+//

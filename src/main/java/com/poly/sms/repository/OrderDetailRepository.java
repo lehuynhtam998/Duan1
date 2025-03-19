@@ -1,8 +1,5 @@
 package com.poly.sms.repository;
 
-import com.poly.sms.dto.ProductQuantityDTO;
-import com.poly.sms.entity.OrderDetail;
-
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import com.poly.sms.dto.ProductQuantityDTO;
+import com.poly.sms.entity.OrderDetail;
+//Phần code của Tâm
 
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Integer> {
@@ -27,3 +28,4 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Intege
            "GROUP BY p.productName")
     List<ProductQuantityDTO> findProductQuantitiesByOrderDate(@Param("date") Date date);
 }
+//

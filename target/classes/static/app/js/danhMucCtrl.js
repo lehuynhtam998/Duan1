@@ -256,6 +256,7 @@ app.controller("danhMucCtrl", function ($scope, $http) {
         $scope.formName.$setPristine();
         $scope.formName.$setUntouched();
     };
+//Phần code của Tâm
 
     $scope.getExpiryStatus = function (product) {
         const manufactureDate = new Date(product.manufactureDate);
@@ -296,5 +297,5 @@ app.controller("danhMucCtrl", function ($scope, $http) {
         }
     };
     
-
+//
 });

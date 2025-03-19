@@ -45,6 +45,8 @@ public interface ProductService {
 
     Page<Product> findByCategoryOrderByUnitPriceAsc(@Param("categoryId") int categoryId, Pageable pageable);
 
+//Phần code của Tâm
+
     Page<Product> findByCategoryIdAndDiscountGreaterThanZeroOrderByUnitPriceDesc(@Param("categoryId") int categoryId,
             Pageable pageable);
 
@@ -53,5 +55,5 @@ public interface ProductService {
 
     // List<Object[]> findExpiringProducts(int days);
     List<Object[]> getTotalCostByMonth(int year);
-
+//
 }

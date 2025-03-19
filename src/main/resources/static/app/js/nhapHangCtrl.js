@@ -58,6 +58,8 @@ app.controller("nhapHangCtrl", function ($scope, $http) {
         }
     };
     //End
+//Phần code của Tâm
+
     $scope.update = () => {
         $http.post('/api/order-details/saveAll', $scope.orderDetails).then(resp => {
             var items = resp.data;
@@ -87,4 +89,5 @@ app.controller("nhapHangCtrl", function ($scope, $http) {
             alert("Cập Nhật Thất Bại");
         })
     }
+//
 });

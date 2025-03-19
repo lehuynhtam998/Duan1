@@ -86,10 +86,11 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
         // p.expiry_duration DAY), CURRENT_DATE())) <= :days " +
         // "ORDER BY days_left", nativeQuery = true)
         // List<Object[]> findExpiringProducts(@Param("days") int days);
+//Phần code của Tâm
         @Query("SELECT MONTH(p.dayAdded) AS month, SUM(p.giaNhap * p.quantity) AS total "
                         + "FROM Product p "
                         + "WHERE YEAR(p.dayAdded) = :year "
                         + "GROUP BY MONTH(p.dayAdded)")
         List<Object[]> getTotalCostByMonth(@Param("year") int year);
-
+//
 }

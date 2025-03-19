@@ -14,7 +14,7 @@ import com.poly.sms.entity.Product;
 import com.poly.sms.entity.ProductImage;
 import com.poly.sms.service.ProductImageService;
 import com.poly.sms.service.ProductService;
-
+//Phần code của Tâm
 @RestController
 @RequestMapping("/api/products")
 public class SearchController {
@@ -73,3 +73,4 @@ public class SearchController {
         }
     }
 }
+//

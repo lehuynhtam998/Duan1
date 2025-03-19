@@ -5,6 +5,7 @@ app.controller('ReportController', function ($scope, $http) {
     $scope.productRevenueData = [];
     $scope.spendingByMonth = [];
 
+//Phần code của Tâm
 
     $scope.year = 2024;
 
@@ -191,3 +192,4 @@ app.controller('ReportController', function ($scope, $http) {
         });
     };
 });
+//

@@ -84,9 +84,11 @@ public class ProductController {
     // List<Object[]> expiringProducts = productService.findExpiringProducts(days);
     // return ResponseEntity.ok(expiringProducts);
     // }
+//Phần code của Tâm
 
     @GetMapping("/total-cost-by-month")
     public List<Object[]> getTotalPriceByMonth(@RequestParam int year) {
         return productService.getTotalCostByMonth(year);
     }
+//
 }

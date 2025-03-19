@@ -56,6 +56,7 @@ public class HomeController {
     .collect(Collectors.toList());
 
     List<ProductWithImage> productWithImages = getProductWithImages(products);
+//Phần code của Tâm
 
     // danh sách top 6 sản phẩm giảm giá cao nhất
     List<Product> dicounProducts =
@@ -69,7 +70,7 @@ public class HomeController {
     // model.addAttribute("features", features);
     return "site/index";
     }
-
+//
     private List<ProductWithImage> getProductWithImages(List<Product> products) {
 
     List<ProductImage> productImages = productImageService.findAll()

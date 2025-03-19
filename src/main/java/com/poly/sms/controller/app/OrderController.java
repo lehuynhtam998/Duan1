@@ -116,7 +116,7 @@ public class OrderController {
             return ResponseEntity.notFound().build();
         }
     }
-
+//Phần code của Tâm
     @GetMapping("/monthly-revenue")
     public ResponseEntity<List<Object[]>> getMonthlyRevenueForYear(@RequestParam int year) {
         return ResponseEntity.ok(orderService.getMonthlyRevenueForYear(year));
@@ -136,4 +136,5 @@ public class OrderController {
     public List<Object[]> getTotalPriceByMonth(@RequestParam int year) {
         return orderService.getTotalPriceByMonth(year);
     }
+//
 }

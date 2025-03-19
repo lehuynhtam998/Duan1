@@ -73,6 +73,7 @@ app.controller("SupplierCtrl", function ($scope, $http) {
     }
   };
   //End
+//Phần code của Tâm
 
   $scope.create = () => {
     var item = angular.copy($scope.item);
@@ -110,3 +111,4 @@ app.controller("SupplierCtrl", function ($scope, $http) {
 
   $scope.load_all();
 });
+//

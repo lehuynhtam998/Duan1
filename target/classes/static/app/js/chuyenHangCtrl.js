@@ -56,6 +56,7 @@ app.controller("chuyenHangCtrl", function ($scope, $http) {
         }
     };
     // End
+//Phần code của Tâm
 
     $scope.update = () => {
         var item = angular.copy($scope.form);
@@ -106,5 +107,5 @@ app.controller("chuyenHangCtrl", function ($scope, $http) {
         $scope.update(); 
     };
 
-
+//
 });
