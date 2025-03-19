@@ -1,0 +1,57 @@
+.invoice {
+    padding: 30px;
+}
+
+.invoice .header img {
+    max-width: 150px;
+}
+
+.invoice h1 {
+    margin-top: 20px;
+    font-size: 2rem;
+}
+
+.invoice .info,
+.invoice .total,
+.invoice .footer {
+    margin-top: 20px;
+}
+
+.invoice .items th,
+.invoice .items td {
+    text-align: right;
+}
+
+.invoice .items th:first-child,
+.invoice .items td:first-child {
+    text-align: left;
+}
+
+.invoice .footer {
+    margin-top: 40px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Styles for printing */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .invoice,
+    .invoice * {
+        visibility: visible;
+    }
+
+    .invoice {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+}

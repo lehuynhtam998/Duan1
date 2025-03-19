@@ -1,0 +1,60 @@
+<div>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-inline my-2 my-lg-0 mr-auto">
+                            <div class="ml-auto">
+                                <a href="#!nhacungcap">
+                                    <button type="button" class="btn btn-primary ml-2">
+                                        <i class="fas fa-th-list"></i> Danh mục nhà cung cấp
+                                    </button>
+                                </a>
+                            </div>
+                        </form>
+                        <br>
+                        <br>
+                        <form name="companyForm" ng-submit="create()" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="companyName">Tên công ty</label>
+                                    <input type="text" class="form-control" ng-model="item.companyName"
+                                        placeholder="Nhập tên công ty" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="contactName">Tên liên lạc</label>
+                                    <input type="text" class="form-control" ng-model="item.contactName"
+                                        placeholder="Nhập tên liên lạc" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="city">Thành phố</label>
+                                    <input type="text" class="form-control" ng-model="item.city"
+                                        placeholder="Nhập địa chỉ thành phố của công ty" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="country">Quốc gia</label>
+                                    <input type="text" class="form-control" ng-model="item.country"
+                                        placeholder="Nhập quốc gia của công ty" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="phone">Số điện thoại công ty</label>
+                                    <input type="tel" class="form-control" ng-model="item.phone"
+                                        placeholder="Nhập số điện thoại công ty" required pattern="[0-9]*">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" ng-disabled="companyForm.$invalid">Save</button>
+                                <button type="button" class="btn btn-primary" ng-click="reset()">Reset</button>
+                            </div>
+                        </form>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

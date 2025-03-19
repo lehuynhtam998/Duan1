@@ -1,0 +1,113 @@
+<div>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-inline my-2 my-lg-0 mr-auto">
+                            <div class="position-relative">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search"
+                                    aria-label="Search">
+                            </div>
+                            <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                            <div class="ml-auto">
+                                <a href="#!danhmuc">
+                                    <button type="button" class="btn btn-primary ml-2">
+                                        <i class="fas fa-th-list"></i> Danh mục sản phẩm
+                                    </button>
+                                </a>
+                            </div>
+                        </form>
+                        <br>
+                        <div class="col-md-4">
+                            <img ng-if="form.images == null" src="https://via.placeholder.com/150" alt="Placeholder Image" class="img-fluid">
+                            <img ng-if="form.images != null" ng-src="/site/img/{{form.images}}" style="max-width: 100%; height: 150px;" alt="Customer Image">
+                            <div class="file-input-wrapper col-md-4">
+                                <button class="btn btn-primary btn-file-input">Chọn Ảnh</button>
+                                <input class="form-control" id="image" type="file"
+                                    onchange="angular.element(this).scope().imageChanged(this.files)">
+                            </div>
+                        </div>
+                        
+                        <br>
+                        <form name="productForm" ng-submit="create()" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="branchType">Loại Sản Phẩm</label>
+                                    <select class="form-control" ng-model="form.category" required>
+                                        <option value="">Chọn Loại Hàng</option>
+                                        <option ng-repeat="c in selectBoxCates" ng-value="c">{{ c.name }}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="branchName">Nhà Cung Cấp</label>
+                                    <select class="form-control" ng-model="form.supplier" required>
+                                        <option value="">Chọn Nhà Cung Cấp</option>
+                                        <option ng-repeat="c in selectBoxSuppliers" ng-value="c">{{ c.companyName }}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="managerName">Tên sản phẩm</label>
+                                    <input type="text" class="form-control" ng-model="form.productName" id="managerName" placeholder="Nhập tên sản phẩm" required>
+                                </div>
+                            </div>
+                        
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="branchName">Chi Nhánh</label>
+                                    <select class="form-control" ng-model="form.branch" required>
+                                        <option value="">Chọn Chi Nhánh</option>
+                                        <option ng-repeat="c in selectBoxBranchs" ng-value="c">{{ c.branchName }}</option>
+                                    </select>
+                                </div>
+                        
+                                <div class="form-group col-md-4">
+                                    <label for="manufactureDate">Ngày sản xuất</label>
+                                    <input type="date" class="form-control" ng-model="form.manufactureDate" id="manufactureDate" required>
+                                </div>
+                        
+                                <div class="form-group col-md-4">
+                                    <label for="expiryDuration">Hạn Sử Dụng (ngày)</label>
+                                    <input type="number" class="form-control" ng-model="form.expiryDuration" id="expiryDuration" placeholder="Nhập số ngày" required min="0">
+                                </div>
+                            </div>
+                        
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="quantity">Số lượng</label>
+                                    <input type="number" class="form-control" ng-model="form.quantity" id="quantity" placeholder="Nhập số lượng" required min="0">
+                                </div>
+                        
+                                <div class="form-group col-md-4">
+                                    <label for="giaNhap">Giá nhập</label>
+                                    <input type="number" class="form-control" ng-model="form.giaNhap" id="giaNhap" placeholder="Nhập giá nhập" required min="0">
+                                </div>
+                        
+                                <div class="form-group col-md-4">
+                                    <label for="unitPrice">Giá bán</label>
+                                    <input type="number" class="form-control" ng-model="form.unitPrice" id="unitPrice" placeholder="Nhập giá bán" required min="0">
+                                </div>
+                            </div>
+                        
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="description">Mô Tả:</label>
+                                    <textarea class="form-control" id="description" ng-model="form.description" rows="3" placeholder="Nhập mô tả"></textarea>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary" ng-disabled="productForm.$invalid">Lưu</button>
+                                <button type="button" class="btn btn-secondary" ng-click="resetForm()">Reset</button>
+
+                            </div>
+                        </form>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

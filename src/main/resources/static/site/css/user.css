@@ -1,0 +1,33 @@
+.form-wrapper {
+    width: 50%;
+    border: 2px solid #ddd; /* Viền cho form */
+    border-radius: 15px; /* Bo tròn các góc */
+    padding: 20px; /* Khoảng cách bên trong form */
+    background-color: #f9f9f9; /* Màu nền nhạt */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+    margin-top: 30px; /* Khoảng cách trên */
+}
+.form-group i {
+    color: #007bff; /* Màu cho icon */
+}
+.form-control {
+    border-radius: 0.25rem; /* Bo tròn các góc của trường nhập */
+}
+.btn-update {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+.btn-update:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.btn-update:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+}

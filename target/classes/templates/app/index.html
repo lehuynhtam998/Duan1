@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset=" utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Bytes Squad</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="/app/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/app/vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" href="/app/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/app/css/style.css">
+  <link rel="stylesheet" href="/app/css/myCss.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="/app/images/favicon.png" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.22/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="/app/css/exportPdf.css">
+</head>
+
+<body ng-app="app-SMS" ng-controller="utilCtrl">
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="navbar-brand-wrapper d-flex justify-content-center">
+        <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
+          <a class="" href="#!home"> <img src="/app/images/bytesquad.jpg" alt="logo" width="100" height="100" /></a>
+          <a class="navbar-brand brand-logo-mini" href="#!home"><img src="/app/images/logo-mini.svg"
+              alt="logo" /></a>
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-sort-variant"></span>
+          </button>
+        </div>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <a href="#!banHang" class="btn btn-outline-primary btn-icon-text"><i
+            class="mdi mdi-basket btn-icon-prepend"></i>
+          Bán hàng</a>
+        <a href="#!themMoiDathang" class="btn btn-outline-primary btn-icon-text m-3"><i
+            class="mdi mdi-basket btn-icon-prepend"></i>
+          Đặt hàng</a>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item dropdown mr-1" ng-Controller="EmailController">
+            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"
+              id="messageDropdown" href="#" data-toggle="dropdown">
+              <i class="mdi mdi-message-text mx-0"></i>
+              <p style="color: rgb(234, 237, 234);border-radius: 10px; padding: 5px; background-color: rgb(25, 144, 203);"
+                ng-if="hasNewEmail == true">{{hasNewEmail}}&nbsp;tin nhắn mới</p>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
+              <a href="#!homthu" class="dropdown-item">Hộp thư</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown mr-4">
+            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown"
+              id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="mdi mdi-settings mx-0"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+              <a href="#!thietLapChiNhanh" class="dropdown-item">Thiết lập cửa hàng</a>
+              <a href="#!quanLyChiNhanh" class="dropdown-item">Quản lý chi nhánh</a>
+              <a href="#!quanLyNguoiDung" class="dropdown-item">Quản lý người dùng</a>
+              <a href="#!authority" class="dropdown-item">Phân quyền</a>
+              <a href="/sms/home" class="dropdown-item">Website</a>
+            </div>
+          </li>
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="/app/images/faces/face5.jpg" alt="profile" />
+              <!-- <span class="nav-profile-name">Louis Barnett</span> -->
+              <span class="nav-profile-name" id="username" sec:authentication="name"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item" th:href="@{/sms/myaccount}">
+                <i class="mdi mdi-settings text-primary"></i>
+                Tài khoản
+              </a>
+              <a class="dropdown-item" th:href="@{/sms/logout}">
+                <i class="mdi mdi-logout text-primary"></i>
+                Đăng xuất
+              </a>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
+          <span class="mdi mdi-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar" ng-controller="navCtrl">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#!">
+              <i class="mdi mdi-eye menu-icon"></i>
+              <span class="menu-title">Tổng quan</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ng-click="toggleCollapse('hanghoa')" href="" aria-expanded="{{!isCollapsed.hanghoa}}"
+              aria-controls="hanghoa">
+              <i class="mdi mdi-cube menu-icon"></i>
+              <span class="menu-title">Hàng hóa</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="hanghoa" ng-class="{'show': !isCollapsed.hanghoa}">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#!danhmuc">Danh mục</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="#!kiemkho">Kiểm kho</a></li> -->
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ng-click="toggleCollapse('giaodich')" href="" aria-expanded="{{!isCollapsed.giaodich}}"
+              aria-controls="giaodich">
+              <i class="mdi mdi-view-headline menu-icon"></i>
+              <span class="menu-title">Giao dịch</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="giaodich" ng-class="{'show': !isCollapsed.giaodich}">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#!dathang">Đặt hàng</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="#!nhaphang">Nhập hàng</a></li> -->
+                <li class="nav-item"> <a class="nav-link" href="#!chuyenhang">Chuyển hàng</a></li>
+                <li class="nav-item"> <a class="nav-link" href="#!hoadon">Hóa đơn</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ng-click="toggleCollapse('doitac')" href="" aria-expanded="{{!isCollapsed.doitac}}"
+              aria-controls="doitac">
+              <i class="mdi mdi-account-multiple menu-icon"></i>
+              <span class="menu-title">Đối tác</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="doitac" ng-class="{'show': !isCollapsed.doitac}">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#!nhacungcap">Nhà cung cấp</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ng-click="toggleCollapse('baocao')" href="" aria-expanded="{{!isCollapsed.baocao}}"
+              aria-controls="baocao">
+              <i class="mdi mdi-calendar-text menu-icon"></i>
+              <span class="menu-title">Báo cáo</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="baocao" ng-class="{'show': !isCollapsed.baocao}">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#!bccuoingay">Tổng quan</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="#!bcbanhang">Bán hàng</a></li>
+                <li class="nav-item"> <a class="nav-link" href="#!bchanghoa">Hàng hóa</a></li> -->
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <!-- partial -->
+      <main class="main-panel">
+        <div ng-view></div>
+      </main>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="/app/vendors/base/vendor.bundle.base.js"></script>
+  <!-- Plugin js for this page-->
+  <script src="/app/vendors/chart.js/Chart.min.js"></script>
+  <!-- End plugin js for this page-->
+  <script src="/app/js/interface/template.js"></script>
+  <script src="/app/js/interface/dashboard.js"></script>
+  <!-- End custom js for this page-->
+  <script src="/app/js/app-SMS.js"></script>
+  <script src="/app/js/navCtrl.js"></script>
+  <script src="/app/js/loaiSanPhamCtrl.js"></script>
+  <script src="/app/js/banHangCtrl.js"></script>
+  <script src="/app/js/danhMucCtrl.js"></script>
+  <script src="/app/js/kiemKhoCtrl.js"></script>
+  <script src="/app/js/authorityCtrl.js"></script>
+  <script src="/app/js/QLChiNhanhCtrl.js"></script>
+  <script src="/app/js/DatHangCtrl.js"></script>
+  <script src="/app/js/chuyenHangCtrl.js"></script>
+  <script src="/app/js/supplierCtrl.js"></script>
+  <script src="/app/js/EmailCtrl.js"></script>
+  <script src="/app/js/qLyUserCtrl.js"></script>
+  <script src="/app/js/AddNhapHangCtrl.js"></script>
+  <script src="/app/js/nhapHangCtrl.js"></script>
+  <script src="/app/js/chuyenHangCtrl.js"></script>
+  <script src="/app/js/hoaDonCtrl.js"></script>
+  <script src="/app/js/utilCtrl.js"></script>
+  <script src="/app/js/AddDatHangCtrl.js"></script>
+  <script src="/app/js/chartCtrl.js"></script>
+  <script src="/app/js/baoCao.js"></script>
+</body>
+
+</html>

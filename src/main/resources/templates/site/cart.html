@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    th:replace="~{/site/layouts/main :: dynamic(~{::main})}">
+
+<head></head>
+
+<body>
+    <main>
+        <div class="carousel-inner " style="position: fixed;  z-index: 2;">
+            <div class="carousel-item active">
+                <img src="/site/img/banner1.webp" alt="Los Angeles" class="fixed-image"
+                    style="width: 100%; height: 100px; margin-top: 70px; ">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Giỏ hàng của bạn</h5>
+                </div>
+            </div>
+        </div>
+        <div class="container cart-wrapper" style="margin-top: 200px;">
+
+            <!-- Cart Table -->
+            <table class="cart-table table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Hình ảnh</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Giá Tiền</th>
+                        <th>Số Lượng</th>
+                        <th>Thành Tiền</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in productWithImgs">
+                        <td><img style="width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            border: 2px solid #ddd;"  ng-src="{{'/site/img/' + item.imgUrl}}" alt="Táo" class="product-img"></td>
+                        <td>{{item.product.productName}}</td>
+                        <td>{{item.product.unitPrice * (1 - item.product.discount) | number:1}}00 VND</td>
+                        <td> <input type="number" ng-model="item.product.quantity"></td>
+                        <td>{{item.product.unitPrice * (1 - item.product.discount)  * item.product.quantity | number:1}}00 VND</td>
+                        <td> <button ng-click="remove(item.product.productId)">
+                            <i class="fa fa-times text-danger"></i>
+                            </button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Total -->
+            <div class="cart-total" style="text-align: right;">
+                <h4>Tổng Số Tiền: {{total() | number:1}}00 VND</h4>
+            </div>
+
+            <!-- Checkout Button -->
+            <div class="text-right">
+                <a class="btn btn-primary btn-checkout" th:href="@{/sms/checkout}"> <i class="bi bi-cart-fill"></i>Đặt hàng</a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

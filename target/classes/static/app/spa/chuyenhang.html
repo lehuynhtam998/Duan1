@@ -1,0 +1,205 @@
+<div>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- tìm kiếm và xuất file -->
+                        <form class="form-inline my-2 my-lg-0 mr-auto">
+                            
+                            <div class="ml-auto">
+                                <button type="button" class="btn btn-primary">
+                                    <i class="fas fa-file-export"></i> Xuất File
+                                </button>
+                            </div>
+                        </form>
+                        <br><br>
+
+                        <!-- danh sách đơn hàng -->
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Mã Hóa Đơn</th>
+                                        <th>Ngày Tạo</th>
+                                        <th>Loại Đơn</th>
+                                        <th>Nơi Gửi</th>
+                                        <th>Trạng Thái</th>
+                                        <th>Người Tạo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-toggle="collapse" data-target="#customer1" class="accordion-toggle"
+                                        ng-repeat-start="item in page" ng-click="showDetails(item)">
+                                        <td>{{item.orderId}}</td>
+                                        <td>{{item.orderDate}}</td>
+                                        <td>{{item.orderType === 'order' ? 'Đơn Online' : 'Đơn Xuất'}}</td>
+                                        <td>{{item.shipAddress}}</td>
+
+                                        <!-- hiển thị trạng thái đơn hàng theo giá trị orderStatus -->
+                                        <td>
+                                            <span ng-switch="item.orderStatus">
+                                                <span ng-switch-when="2">Đang xử lý</span>
+                                                <span ng-switch-when="5">Đang giao hàng</span>
+                                                <span ng-switch-when="3">Hoàn thành</span>
+                                                <span ng-switch-when="4">Đã hủy</span>
+                                            </span>
+                                        </td>
+
+                                        <td>{{item.seller}}</td>
+                                        <td>
+                                            <!-- hủy đơn hàng với thông tin đơn hàng hiện tại -->
+                                            <button type="button" class="btn btn-danger"
+                                                ng-click="cancelOrder(item); $event.stopPropagation()">Hủy đơn
+                                                hàng</button>
+
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="selectedRow === item" ng-repeat-end>
+                                        <td colspan="8" class="hiddenRow">
+                                            <div id="customer1" class="accordion-body collapse p-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" id="info-tab"
+                                                                    data-toggle="tab" href="#info" role="tab"
+                                                                    aria-controls="info" aria-selected="true">Chi Tiết
+                                                                    Đơn Nhập</a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content mt-3" id="myTabContent">
+                                                            <div class="tab-pane fade show active" id="info"
+                                                                role="tabpanel" aria-labelledby="info-tab">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <form class="w-100">
+                                                                            <!-- bảng chi tiết sản phẩm -->
+                                                                            <div class="form-table">
+                                                                                <div class="form-row">
+                                                                                    <div class="form-cell"><label
+                                                                                            class="col-form-label">Mã
+                                                                                            Sản Phẩm</label></div>
+                                                                                    <div class="form-cell"><label
+                                                                                            class="col-form-label">Tên
+                                                                                            Sản Phẩm</label></div>
+                                                                                    <div class="form-cell"><label
+                                                                                            class="col-form-label">Giá
+                                                                                            Nhập</label></div>
+                                                                                    <div class="form-cell"><label
+                                                                                            class="col-form-label">Giá
+                                                                                            Bán</label></div>
+                                                                                    <div class="form-cell"><label
+                                                                                            class="col-form-label">Số
+                                                                                            Lượng</label></div>
+                                                                                    <div class="form-cell"><label
+                                                                                            class="col-form-label">Tổng
+                                                                                            Tiền Sản Phẩm</label></div>
+                                                                                </div>
+                                                                                <div class="form-row"
+                                                                                    ng-repeat="orderDetail in orderDetails">
+                                                                                    <div class="form-cell">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            value="{{orderDetail.product.productId}}"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                    <div class="form-cell">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            value="{{orderDetail.product.productName}}"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                    <div class="form-cell">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            value="{{orderDetail.import_price}}"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                    <div class="form-cell">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            value="{{orderDetail.price}}"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                    <div class="form-cell">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            value="{{orderDetail.quantity}}"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                    <div class="form-cell">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            ng-value="orderDetail.import_price * orderDetail.quantity"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- combobox chọn trạng thái đơn hàng -->
+                                                                            <div class="form-group mt-3">
+                                                                                <label for="orderStatus">Trạng thái đơn
+                                                                                    hàng</label>
+                                                                                <select id="orderStatus"
+                                                                                    ng-model="form.orderStatus"
+                                                                                    class="form-control">
+                                                                                    <option value="2">Đang xử lý
+                                                                                    </option>
+                                                                                    <option value="5">Đang giao hàng
+                                                                                    </option>
+                                                                                    <option value="3">Hoàn thành
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <!-- nút cập nhật -->
+                                                                            <div class="form-group mt-3">
+                                                                                <button type="button"
+                                                                                    class="btn btn-success"
+                                                                                    ng-click="update()">Cập
+                                                                                    nhật</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="row justify-content-center align-items-center g-2">
+                        <div class="col-auto">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item" ng-class="{disabled: currentPage === 1}">
+                                        <a class="page-link" ng-click="setPage(1)">First</a>
+                                    </li>
+                                    <li class="page-item" ng-class="{disabled: currentPage === 1}">
+                                        <a class="page-link" ng-click="setPage(currentPage - 1)">Previous</a>
+                                    </li>
+                                    <li class="page-item" ng-class="{disabled: currentPage >= totalItems/itemsPerPage}">
+                                        <a class="page-link" ng-click="setPage(currentPage + 1)">Next</a>
+                                    </li>
+                                    <li class="page-item" ng-class="{disabled: currentPage >= totalItems/itemsPerPage}">
+                                        <a class="page-link" ng-click="setPage(totalItems/itemsPerPage)">Last</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer"></footer>
+</div>

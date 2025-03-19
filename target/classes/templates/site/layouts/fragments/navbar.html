@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <div th:fragment="navbar">
+        <div class="fixed-top">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+                <div class="navbar-content container position-relative">
+                    <!-- Logo -->
+                    <a class="navbar-brand" th:href="@{/sms/home}">
+                        <img src="/site/img/logo.png" alt="Logo" class="logo">
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/sms/home}">Trang Chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/sms/shop}">Sản Phẩm</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/sms/contact}">Liên Hệ</a>
+                            </li>
+                        </ul>
+                        <!-- Search form -->
+                        <div class="position-relative">
+                            <form class="form-inline my-2 my-lg-0 mr-3" ng-submit="search()">
+                                <input id="searchInput" class="form-control mr-sm-2" type="search"
+                                    ng-model="searchQuery" placeholder="Tìm kiếm sản phẩm" aria-label="Search"
+                                    ng-change="search()">
+                                <!-- <button class="btn btn-light my-2 my-sm-0" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button> -->
+                            </form>
+                            <div id="search-suggestions" ng-show="searchResults.length > 0"
+                                style="margin-top: 9px; position: fixed; background-color: aliceblue; width: 207px;">
+                                <ul>
+                                    <li ng-repeat="item in searchResults" style="color: white">
+                                        <a ng-href="{{ '/sms/shopdetails/' + item.productId }}"
+                                            style="display: flex; align-items: center; text-decoration: none; color: black; padding-top: 20px;">
+                                            <img ng-src="{{ '/site/img/' + item.imageUrl }}" alt="{{item.productName}}"
+                                                style="width: 50px; height: 50px; margin-right: 10px;">
+                                            <span>{{item.productName}}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- User info and cart -->
+                        <th:block sec:authorize="isAuthenticated()">
+                            <a style="color: aliceblue;" th:href="@{/sms/app}" class="nav-item nav-link"
+                                sec:authorize="hasAnyRole('ADMIN','USER')">Manage</a>
+                        </th:block>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/sms/cart}"><i class="fas fa-shopping-cart"></i>
+                                    <span ng-bind="productWithImgs.length"></span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-user"></i>
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <b>[<span id="username" sec:authentication="name"></span>]</b>
+                                    </th:block>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <th:block sec:authorize="!isAuthenticated()">
+                                        <a class="dropdown-item" th:href="@{/sms/login}">Đăng nhập</a>
+                                        <a class="dropdown-item" th:href="@{/sms/register}">Đăng ký</a>
+                                    </th:block>
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <a class="dropdown-item" th:href="@{/sms/myaccount}">Tài khoản</a>
+                                        <a class="dropdown-item" th:href="@{/sms/reset-password}">Đổi mật khẩu</a>
+                                        <a class="dropdown-item" th:href="@{/sms/forgot}">Lấy lại mật khẩu</a>
+                                        <a class="dropdown-item" th:href="@{/sms/orderhistory}">Lịch sử mua hàng</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" th:href="@{/sms/logout}">Đăng xuất</a>
+                                    </th:block>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div th:if="${showMessage}" class="alert alert-success d-flex justify-content-end" role="alert">
+                Product added to cart successfully!
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

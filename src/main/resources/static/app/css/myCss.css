@@ -1,0 +1,107 @@
+.image-card {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 5 columns */
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    height: 80%;
+    max-width: 1000px;
+    box-sizing: border-box;
+}
+
+.image-item img {
+    width: 100%;
+    height: calc((100vh - 40px) / 2 - 20px); /* Adjust the height for two rows with gaps and padding */
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.image-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.image-item figcaption {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #555;
+}
+.input-underline {
+    border: none;
+    border-bottom: 1px solid #ced4da; /* Màu và độ dày của thanh gạch dưới */
+    border-radius: 0; /* Loại bỏ đường viền bo góc */
+    box-shadow: none; /* Loại bỏ đổ bóng */
+}
+.input-underline:focus {
+    border-color: #4CAF50; /* Màu sắc khi input được focus */
+    box-shadow: none; /* Loại bỏ đổ bóng khi focus */
+}
+.quantity-container {
+    display: flex;
+    align-items: center;
+}
+.quantity-container button {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    text-align: center;
+}
+.quantity-container input {
+    width: 50px;
+    text-align: center;
+    font-size: 18px;
+    margin: 0 5px;
+}
+.image-container {
+    width: 100%;
+    overflow: hidden;
+}
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.form-table {
+            display: table;
+            width: 100%;
+            border-collapse: collapse;
+}
+.form-table .form-row {
+            display: table-row;
+}
+.form-table .form-cell {
+            display: table-cell;
+            border: 1px solid #dee2e6;
+            padding: .75rem;
+}
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.file-input-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.btn-file-input {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.image-card1 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    /* 5 columns */
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    height: 80%;
+    box-sizing: border-box;
+}

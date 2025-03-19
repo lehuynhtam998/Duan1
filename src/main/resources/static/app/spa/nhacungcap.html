@@ -1,0 +1,152 @@
+<div>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-inline my-2 my-lg-0 mr-auto">
+                            <div class="position-relative">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" ng-model="text"
+                                    required>
+
+                            </div>
+                            <button class="btn btn-outline-success my-2 my-sm-0 mr-2" ng-click="search(text)">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                            <div class="ml-auto">
+                                <a href="#!themMoiNhaCungCap">
+                                    <button type="button" class="btn btn-primary ml-2">
+                                        <i class="fas fa-plus"></i> Thêm mới
+                                    </button>
+                                </a>
+                            </div>
+                        </form>
+                        <br>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Mã ncc</th>
+                                        <th>Công ty</th>
+                                        <th>Người liên hệ</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Điện thoại</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-toggle="collapse" data-target="#customer1" class="accordion-toggle"
+                                        ng-repeat-start="item in pages" ng-click="showDetails(item)">
+                                        <td>{{item.supplierId}}</td>
+                                        <td>{{item.companyName}}</td>
+                                        <td>{{item.contactName}}</td>
+                                        <td>{{item.address}}</td>
+                                        <td>{{item.phone}}</td>
+                                    </tr>
+                                    <tr ng-if="selectedRow === item" ng-repeat-end>
+                                        <td colspan=" 8" class="hiddenRow">
+                                            <div id="customer1" class="accordion-body collapse p-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" id="info-tab"
+                                                                    data-toggle="tab" href="#info" role="tab"
+                                                                    aria-controls="info" aria-selected="true">Thông
+                                                                    tin</a>
+                                                            </li>
+
+                                                        </ul>
+                                                        <div class="tab-content mt-3" id="myTabContent">
+                                                            <div class="tab-pane fade show active" id="info"
+                                                                role="tabpanel" aria-labelledby="info-tab">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <form name="supplierForm" ng-submit="submitForm()" novalidate class="d-flex flex-column align-items-center">
+                                                                            <div class="form-group row w-100 justify-content-between">
+                                                                                <label for="customerID" class="col-sm-2 col-form-label">Mã đối tác</label>
+                                                                                <div class="col-sm-4">
+                                                                                    <input type="text" class="form-control" ng-model="item.supplierId" readonly>
+                                                                                </div>
+                                                                                <label for="customerPhone" class="col-sm-2 col-form-label">Tên công ty</label>
+                                                                                <div class="col-sm-4">
+                                                                                    <input type="text" class="form-control" ng-model="item.companyName" required>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row w-100 justify-content-between">
+                                                                                <label for="customerName" class="col-sm-2 col-form-label">Tên liên lạc</label>
+                                                                                <div class="col-sm-4">
+                                                                                    <input type="text" class="form-control" ng-model="item.contactName" required>
+                                                                                </div>
+                                                                                <label for="customerAddress" class="col-sm-2 col-form-label">Địa chỉ</label>
+                                                                                <div class="col-sm-4">
+                                                                                    <input type="text" class="form-control" ng-model="item.address" required>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row w-100 justify-content-between">
+                                                                                <label for="customerEmail" class="col-sm-2 col-form-label">Thành phố</label>
+                                                                                <div class="col-sm-4">
+                                                                                    <input type="text" class="form-control" ng-model="item.city" required>
+                                                                                </div>
+                                                                                <label for="customerCreateDate" class="col-sm-2 col-form-label">Quốc gia</label>
+                                                                                <div class="col-sm-4">
+                                                                                    <input type="text" class="form-control" ng-model="item.country" required>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row w-100 justify-content-between">
+                                                                                <label for="customerPhone" class="col-sm-2 col-form-label">Số điện thoại</label>
+                                                                                <div class="col-sm-4">
+                                                                                    <input type="text" class="form-control" ng-model="item.phone" required>
+                                                                                </div>
+                                                                                <label for="customerEmail" class="col-sm-2 col-form-label">Tiêu đề</label>
+                                                                                <div class="col-sm-4">
+                                                                                    <input type="text" class="form-control" ng-model="contactTitle" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary" ng-disabled="supplierForm.$invalid" ng-click="update(item.supplierId)" style="margin-right: 1250px;">Lưu</button>
+                                                                        </form>
+                                                                        
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <!-- Add other tab contents here as needed -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Add more customer rows as needed -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <br><br>
+                        <div class="col offset-md-4">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item" ng-class="{disabled: currentPage === 1}">
+                                        <a class="page-link" ng-click="setPage(1)">First</a>
+                                    </li>
+                                    <li class="page-item" ng-class="{disabled: currentPage === 1}">
+                                        <a class="page-link" ng-click="setPage(currentPage - 1)">Previous</a>
+                                    </li>
+                                    <li class="page-item" ng-class="{disabled: currentPage >= totalItems/itemsPerPage}">
+                                        <a class="page-link" ng-click="setPage(currentPage + 1)">Next</a>
+                                    </li>
+                                    <li class="page-item" ng-class="{disabled: currentPage >= totalItems/itemsPerPage}">
+                                        <a class="page-link" ng-click="setPage(totalItems/itemsPerPage)">Last</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+    <footer class="footer"></footer>
+    <!-- partial -->
+</div>

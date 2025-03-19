@@ -1,0 +1,187 @@
+<div>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-7 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container">
+                            <form class="row" role="search">
+                                <div class="col-md-4">
+                                    <input class="form-control me-2" type="search" placeholder="Search"
+                                        aria-label="Search">
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <select class="form-control" ng-change="init()" ng-model="selectedOption"
+                                        ng-options="c as c.branchName for c in selectBoxBranchs track by c.branchId">
+                                        <option value="">Chọn Chi Nhánh</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="image-card">
+                            <figure class="image-item text-center" ng-repeat="product in page">
+                                <img ng-src="/site/img/{{product.images.at(-1)}}" alt="Image 1"
+                                    ng-click="cart.add(product.productId)">
+                                <figcaption>{{product.productName}}</figcaption>
+                            </figure>
+                        </div>
+                        <div class="row justify-content-center align-items-center g-2">
+                            <div class="col-auto">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <li class="page-item" ng-class="{disabled: currentPage === 1}">
+                                            <a class="page-link" ng-click="setPage(1)">First</a>
+                                        </li>
+                                        <li class="page-item" ng-class="{disabled: currentPage === 1}">
+                                            <a class="page-link" ng-click="setPage(currentPage - 1)">Previous</a>
+                                        </li>
+                                        <li class="page-item"
+                                            ng-class="{disabled: currentPage >= totalItems/itemsPerPage}">
+                                            <a class="page-link" ng-click="setPage(currentPage + 1)">Next</a>
+                                        </li>
+                                        <li class="page-item"
+                                            ng-class="{disabled: currentPage >= totalItems/itemsPerPage}">
+                                            <a class="page-link" ng-click="setPage(totalItems/itemsPerPage)">Last</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Chi Tiết Đơn Nhập</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Ten SP
+                                                </th>
+                                                <th>
+                                                    Giá Nhập
+                                                </th>
+                                                <th>
+                                                    Giá bán
+                                                </th>
+                                                <th>
+                                                    Số Lượng
+                                                </th>
+                                                <th>Tổng Nhập</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in cart.items">
+                                                <td>
+                                                    {{item.productName}}
+                                                </td>
+                                                <td>
+                                                    <input type="text" ng-model="item.giaNhap">
+                                                </td>
+                                                <td>
+                                                    <input type="text" ng-model="item.unitPrice">
+                                                </td>
+                                                <td><!-- Input Order -->
+                                                    <div class="quantity-container">
+                                                        <input type="number" id="quantity" ng-model="item.qty" min="1">
+                                                    </div>
+                                                    <!--/ End Input Order -->
+                                                </td>
+                                                <td>
+                                                    <span>${{item.qty*item.giaNhap | number:2}}</span>
+                                                </td>
+                                                <td class="action" data-title="Remove"><a
+                                                        ng-click="cart.remove(item.productId)"><i
+                                                            class="bi bi-trash3-fill"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Thông Tin Đơn Nhập</h4>
+                        <form>
+                            <div class="row mb-3">
+                                <label for="name" class="col-sm-1 col-form-label"><i class="bi bi-geo-fill"></i></label>
+                                <div class="col-sm-11">
+                                    <select class="form-control" ng-model="supplier"
+                                        ng-options="c as c.companyName for c in selectBoxSuppliers track by c.supplierId">
+                                        <option value="">Chọn Nhà Cung Cấp</option>
+                                    </select>
+                                    <!-- <input type="text" class="form-control input-underline" id="name" name="name"
+                                        placeholder="Địa chỉ nhập hàng" ng-model="order.shipAddress"> -->
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="name" class="col-sm-1 col-form-label"><i
+                                        class="bi bi-geo-alt-fill"></i></label>
+                                <div class="col-sm-11">
+                                    <input type="text" class="form-control input-underline" id="name" name="name"
+                                        required ng-value="selectedOption.address">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="name" class="col-sm-1 col-form-label"></label>
+                                <div class="col-sm-11">
+                                    <input type="text" class="form-control input-underline" id="name" name="name"
+                                        required placeholder="Điện Thoại" ng-model="order.sdtNguoiNhan">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="name" class="col-sm-1 col-form-label"></label>
+                                <div class="col-sm-11">
+                                    <input type="text" class="form-control input-underline" id="name" name="name"
+                                        required placeholder="Tên NGười Nhận" ng-model="order.nguoiNhan">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="amount" class="col-sm-1 col-form-label"><i
+                                        class="bi bi-pen-fill"></i></label>
+                                <div class="col-sm-11">
+                                    <input type="text" class="form-control input-underline" id="amount" name="amount"
+                                        required placeholder="Ghi chú đơn hàng" ng-model="order.comments">
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="row mb-3">
+                                <label for="name" class="col-sm-4 col-form-label">Tổng Tiền
+                                    Hàng:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control input-underline text-center" id="name"
+                                        name="name" disabled value="${{cart.amount |number:2}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 text-center">
+                                    <a href="#!nhaphang">
+                                        <button type="submit" class="btn btn-primary w-100">Danh Sách Đơn Nhập</button>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <button type="submit" ng-click="order.purchase()" class="btn btn-primary w-100">Tạo
+                                        Mới</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer"></footer>
+        <!-- partial -->
+    </div>
+</div>
